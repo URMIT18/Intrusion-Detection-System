@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Data</title>
+</head>
+<style>
+    /* CSS styles */
+    
+    body {
+        background-color: #000000;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+        padding-block-start: 20px;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #555;
+        margin-block-start: 10px;
+    }
+    
+    .container {
+        max-inline-size: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-block-start: 150px;
+        /* Add margin space upward */
+    }
+    
+    .message {
+        display: none;
+        text-align: center;
+        background-color: #dff0d8;
+        color: #3c763d;
+        padding: 10px;
+        margin-block-end: 20px;
+        border-radius: 5px;
+    }
+    
+    .upload-button {
+        display: block;
+        margin: 10px auto;
+        padding: 8px 16px;
+        background-color: #dff0d8;
+        color: #3c763d;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .upload-button:hover {
+        background-color: #dff0d8;
+    }
+</style>
+
+<body onload="showMessage()">
+    <div class="container">
+        <h1>Intrusion Detection System</h1>
+        <h2>Upload Train Dataset</h2>
+
+        <!-- Pop-up message section -->
+        <div id="message" class="message"></div>
+
+        <!-- Upload form -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="excel_file" />
+            <input type="submit" value="Upload" class="upload-button" />
+        </form>
+
+        <!-- Next button to open the form page -->
+        <a href="/form" class="upload-button">Next</a>
+    </div>
+</body>
+<script>
+    // Function to show the pop-up message
+    function showMessage() {
+        // Get the message element
+        var messageElement = document.getElementById("message");
+
+        // Set the message text
+        messageElement.innerText = "{{ message }}";
+
+        // Show the message element
+        messageElement.style.display = "block";
+    }
+</script>
+
+</html>

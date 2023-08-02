@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare</title>
+</head>
+    <style>
+        h1 {
+            text-align: center;
+            margin-block-end: 20px;
+        }
+    
+        h2 {
+            margin-block-end: 10px;
+        }
+    
+        /* Style for the table */
+        table {
+            border-collapse: collapse;
+            inline-size: 100%;
+        }
+    
+        th, td {
+            padding: 8px;
+            text-align: start;
+            border-block-end: 1px solid #ddd;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+    
+        /* Style for the drop table form */
+        .drop-table-form {
+            margin-block-start: 20px;
+            text-align: center;
+        }
+    
+        .drop-table-form input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <body>
+        <h1>Intrusion Detection System</h1>
+        <h2>Final Result</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Protocol Type</th>
+                    <th>Service</th>
+                    <th>Destination Bytes</th>
+                    <th>Flag</th>
+                    <th>Source Bytes</th>
+                    <th>Urgent</th>
+                    <th>Wrong Fragment</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in matching_rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <form class="drop-table-form" action="/drop-table" method="POST">
+            <input type="submit" value="Reset">
+        </form>
+        <p><a href="templates\compare_graph.html">View Compare Graph</a></p>
+    </body>
+    </html>            

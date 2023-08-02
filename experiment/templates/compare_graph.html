@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            max-inline-size: 600px;
+            margin-block-start: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comparison Results</h1>
+
+    <h2>Matching Rows:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Protocol Type</th>
+                <th>Service</th>
+                <th>Destination Bytes</th>
+                <th>Flag</th>
+                <th>Source Bytes</th>
+                <th>Urgent</th>
+                <th>Wrong Fragment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in matching_rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Comparison Graph:</h2>
+    <div id="compare_graph">
+        <canvas id="graph-canvas"></canvas>
+    </div>
+
+    <script>
+        // Get the labels and data from the Flask template
+        var labels = {{ labels|tojson }};
+        var data = {{ data|tojson }};
+
+        // Create a Chart.js chart
+        var ctx = document.getElementById('graph-canvas').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Data Count',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderinline-size: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
